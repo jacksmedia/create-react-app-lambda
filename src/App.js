@@ -22,8 +22,7 @@ class LambdaDemo extends Component {
 
     return (
       <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
+        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading, Plz Stand By..." : "Call Async Lambda"}</button>
         <br />
         <span>{msg}</span>
       </p>
@@ -37,9 +36,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+          <h1>
+            We believe in ourselves
+          </h1>
           <LambdaDemo />
         </header>
       </div>
