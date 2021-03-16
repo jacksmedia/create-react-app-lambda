@@ -5,7 +5,7 @@ import "./App.css"
 class LambdaDemo extends Component {
   constructor(props) {
     super(props)
-    this.state = { loading: false, msg: null }
+    this.state = { loading: false, coints: [] }
   }
 
   handleClick = api => e => {
@@ -14,17 +14,29 @@ class LambdaDemo extends Component {
     this.setState({ loading: true })
     fetch("/.netlify/functions/" + api)
       .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
+      .then(json => this.setState({ loading: false, coints: json.data }))
   }
 
   render() {
-    const { loading, msg } = this.state
+    const { loading, coints } = this.state
 
     return (
       <p>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading, Plz Stand By..." : "Call Async Lambda"}</button>
+        <h2 onClick={this.handleClick("async-nomics-get")}
+         className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click Here for Fresh Crypto Prices"}</h2>
         <br />
-        <span>{msg}</span>
+          <p>Sortable features coming this week!
+          </p>
+          <ul>
+            {this.state.coints.map(
+              coint => <li key={coint.name}>
+              <p>
+                <span>{coint.currency}&nbsp;</span>
+                ${coint.price}
+              </p>
+              </li>
+            )}
+          </ul>
       </p>
     )
   }
@@ -35,10 +47,17 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>
-            We believe in ourselves
-          </h1>
+          <h1>Top100Crypto.info</h1>
+          <h3>
+            <a
+              className="App-link"
+              href="https://j4cks.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Built By Jacks Consulting
+            </a>
+          </h3>
           <LambdaDemo />
         </header>
       </div>
