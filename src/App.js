@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import logo from "./logo.svg"
 import "./App.css"
 
 class LambdaDemo extends Component {
@@ -18,7 +17,7 @@ class LambdaDemo extends Component {
   }
 
   render() {
-    const { loading, coints } = this.state
+    const { loading } = this.state
 
     return (
       <p>
