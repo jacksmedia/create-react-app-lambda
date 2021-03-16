@@ -26,13 +26,11 @@ class LambdaDemo extends Component {
         <br />
           <p>Sortable features coming this week!
           </p>
-          <ul>
+          <ul className="big-list">
             {this.state.coints.map(
-              coint => <li key={coint.name}>
-              <p>
-                <span>{coint.currency}&nbsp;</span>
+              coint => <li key={coint.name} className="crypto">
+                {coint.currency}&nbsp;
                 ${coint.price}
-              </p>
               </li>
             )}
           </ul>
