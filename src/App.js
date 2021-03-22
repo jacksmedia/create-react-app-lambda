@@ -44,7 +44,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Top100Crypto.info</h1>
+          <h1 className="logo-text-splendor">Top100Crypto.info</h1>
           <h3>
             <a
               className="App-link"
