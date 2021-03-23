@@ -38,17 +38,18 @@
 .big-list {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
   flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
   list-style: none;
 }
 .big-list .crypto {
-  width: 9vw; 
-  min-width: 9vw;
-  font-size: 1.15vw;
-  border-radius: 1rem;
-  border: 1px navy dashed;
+  width: 14vw; 
+  min-width: 14vw;
+  font-size: 1.75vw;
+  border-radius: 2.5vw;
+  border: 0.5vw navy dashed;
+  margin-bottom: 1vw;
 }
 
 

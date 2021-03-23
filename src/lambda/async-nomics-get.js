@@ -4,7 +4,7 @@
 import axios from "axios"
 export async function handler(event, context) {
   try {
-    const response = await axios.get("https://api.nomics.com/v1/prices?key=643698f1108812b938fe8a2d81983059&interval=1d,7d&quote-currency=USD", { headers: { Accept: "application/json" } })
+    const response = await axios.get("https://api.nomics.com/v1/prices?key=643698f1108812b938fe8a2d81983059&interval=1d,7d&quote-currency=USD&status=active,&sort=rank", { headers: { Accept: "application/json" } })
     const data = response.data
     return {
       statusCode: 200,

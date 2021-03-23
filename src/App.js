@@ -28,9 +28,9 @@ class LambdaDemo extends Component {
           </p>
           <ul className="big-list">
             {this.state.coints.map(
-              coint => <li key={coint.name} className="crypto">
-                {coint.currency}&nbsp;
-                ${coint.price}
+              coint => <li key={coint.currency} className="crypto">
+                <h6>{coint.currency}</h6>
+                <h6>${coint.price}</h6>
               </li>
             )}
           </ul>
