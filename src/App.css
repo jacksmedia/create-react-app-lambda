@@ -13,10 +13,7 @@
   font-size: calc(10px + 2vmin);
   color: #020;
 }
-.App-logo {
-  height: 11vmin;
-}
-.App-logo-text {
+.App-feature {
   font-size: 3.65vw;
   background-color: #020;
   padding: 0.8rem;

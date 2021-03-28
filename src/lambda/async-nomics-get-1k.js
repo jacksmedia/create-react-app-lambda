@@ -2,9 +2,12 @@
 // https://github.com/netlify/netlify-lambda/issues/43#issuecomment-444618311
 
 import axios from "axios"
+
+const currentAPIkey = process.env.nomicsAPIk3y
+
 export async function handler(event, context) {
   try {
-    const response = await axios.get("https://api.nomics.com/v1/currencies/ticker?key=643698f1108812b938fe8a2d81983059&status=active&per-page=100&page=1", { headers: { Accept: "application/json" } })
+    const response = await axios.get("https://api.nomics.com/v1/currencies/ticker?key=643698f1108812b938fe8a2d81983059&status=active&per-page=33&page=1", { headers: { Accept: "application/json" } })
     const data = response.data
     return {
       statusCode: 200,

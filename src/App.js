@@ -20,9 +20,19 @@ class LambdaDemo extends Component {
     const { loading } = this.state
     console.log(this.state.coints)
     return (
-      <div className="App-feature" >
-        <h2 onClick={this.handleClick("async-nomics-get")}
-         className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click Here for Fresh Crypto Prices"}</h2>
+      <div>
+        <div className="App-feature">
+          {/* button that makes API call for 100 values */}
+          <h2 onClick={this.handleClick("async-nomics-get-100")}
+           className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click Here for Top 100"}
+          </h2>
+
+          {/* button that makes API call for 1k values -- in dev, rn does 33 not 1000 */}
+          <h2 onClick={this.handleClick("async-nomics-get-1k")}
+           className="App-logo-text">{loading ? "Loading, This Might Take A Few..." : "Click Here for Top 33"}
+          </h2>
+        </div>
+
         <h3>Displaying prices on {this.state.coints.length} digital securities</h3>
         <h2>Sorting features coming soon!</h2>
         <ul className="big-list">
@@ -53,6 +63,7 @@ class App extends Component {
       <div className="App">
         <header>
           <h1 className="logo-text-splendor">Top100Crypto.info</h1>
+          <h2 className="logo-text-splendor">Cryptocurrency prices</h2>
           <h3>
             <a
               className="App-link"
