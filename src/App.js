@@ -21,17 +21,16 @@ class LambdaDemo extends Component {
     console.log(this.state.coints)
     return (
       <div>
-        <div className="App-feature">
+        <ul className="App-feature">
           {/* button that makes API call for 100 values */}
-          <h2 onClick={this.handleClick("async-nomics-get-100")}
-           className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click Here for Top 100"}
-          </h2>
-
+          <li onClick={this.handleClick("async-nomics-get-100")}
+           className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click for Top 100"}
+          </li>
           {/* button that makes API call for 1k values -- in dev, rn does 33 not 1000 */}
-          <h2 onClick={this.handleClick("async-nomics-get-1k")}
-           className="App-logo-text">{loading ? "Loading, This Might Take A Few..." : "Click Here for Top 33"}
-          </h2>
-        </div>
+          <li onClick={this.handleClick("async-nomics-get-1k")}
+           className="App-logo-text">{loading ? "Loading, This Might Take A Few..." : "Click for Top 33"}
+          </li>
+        </ul>
 
         <h3>Displaying prices on {this.state.coints.length} digital securities</h3>
         <h2>Sorting features coming soon!</h2>
