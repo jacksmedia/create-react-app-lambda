@@ -41,10 +41,10 @@ class LambdaDemo extends Component {
               plz build an img component for this prop,
               sized about 28px x 28px max;
               just big enough to see the logo colors
-
-               <h6>{coint.logo_url}</h6>
-              
               */}
+
+              <img src={coint.logo_url} className="lil-image"/>
+              
               <h4>{coint.symbol}</h4>
               <h5>${coint.price}</h5>
               <h6>{coint.name}</h6>
@@ -62,8 +62,8 @@ class App extends Component {
       <div className="App">
         <header>
           <h1 className="logo-text-splendor">Top100Crypto.info</h1>
-          <h2 className="logo-text-splendor">Cryptocurrency prices</h2>
-          <h3>
+          <h3 className="logo-text-splendor">Live Cryptocurrency Prices</h3>
+          <h4>
             <a
               className="App-link"
               href="https://j4cks.com"
@@ -72,7 +72,7 @@ class App extends Component {
             >
               Built By Jacks Consulting
             </a>
-          </h3>
+          </h4>
           <LambdaDemo />
         </header>
       </div>
