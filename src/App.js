@@ -37,15 +37,14 @@ class LambdaDemo extends Component {
         <ul className="big-list">
           {this.state.coints.map(
             coint => <li key={coint.id} className="crypto">
-              {/*
-              plz build an img component for this prop,
-              sized about 28px x 28px max;
-              just big enough to see the logo colors
-              */}
 
               <img src={coint.logo_url} className="lil-image"/>
-              
-              <h4>{coint.symbol}</h4>
+              {/*
+                these props' layout v hacky; oughta get separation into own components
+              */}
+              <h4>{coint.symbol}
+                <h6>(#{coint.rank})</h6>
+              </h4>
               <h5>${coint.price}</h5>
               <h6>{coint.name}</h6>
             </li>
