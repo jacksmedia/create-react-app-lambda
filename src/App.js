@@ -38,7 +38,7 @@ class LambdaDemo extends Component {
           {this.state.coints.map(
             coint => <li key={coint.id} className="crypto">
 
-              <img src={coint.logo_url} className="lil-image"/>
+              <img src={coint.logo_url} className="lil-image" alt='image of a cryptocurrency logo'/>
               {/*
                 these props' layout v hacky; oughta get separation into own components
               */}
