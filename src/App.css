@@ -4,7 +4,7 @@
 }
 .App {
   text-align: center;
-  background: linear-gradient(snow, #f8f);
+  background: linear-gradient(snow, #88f);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -47,10 +47,10 @@
   margin-bottom: 1vw;
 }
 .lil-image {
-  width: 99px;
-  max-width: 99px;
-  height: 99px;
-  max-height: 99px;
+  width: 12vw;
+  max-width: 60px;
+  height: 12vw;
+  max-height: 60px;
 }
 
 
