@@ -3,7 +3,9 @@ import {
   BrowserRouter as Router,
   Switch, 
   Route,
-  Link
+  Link,
+  useParams,
+  useRouteMatch
 } from "react-router-dom"
 import "./App.css"
 
@@ -61,6 +63,32 @@ class LambdaDemo extends Component {
   }
 }
 
+function About() {
+  return <p>Dummy ABOUT page</p>;
+}
+function Guide() {
+  return <p>Dummy Guide page</p>;
+}
+
+function Coints() {
+  let match = useRouteMatch();
+
+  return(
+    <div>
+      <h2>Top 100 Coin Symbols Today</h2>
+      <Switch>
+        <Route path={`${match.path}/:cointId`}>
+          <Coint />
+        </Route>
+      </Switch>
+    </div>
+  );
+}
+function Coint() {
+  let { cointId } = useParams();
+  return <h3>Coin symbol: {cointId}</h3>
+}
+
 class App extends Component {
   render() {
     return (
@@ -77,7 +105,7 @@ class App extends Component {
                   <Link to="/about">About</Link>
                 </li>
                 <li>
-                  <Link to="/users">Users</Link>
+                  <Link to="/guide">Guide</Link>
                 </li>
               </ul>
             </nav>
@@ -86,10 +114,10 @@ class App extends Component {
             (Router only declares URLs, afaict)  */}
           <Switch>
             <Route path="/about">
-              <p>Dummy ABOUT page</p>
+              <About />
             </Route>
-            <Route path="/users">
-              <p>Dummy USERS page</p>
+            <Route path="/guide">
+              <Guide />
             </Route>
             <Route path="/">
               <h1 className="logo-text-splendor">Top100Crypto.info</h1>
