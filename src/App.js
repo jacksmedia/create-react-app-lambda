@@ -1,4 +1,10 @@
 import React, { Component } from "react"
+import {
+  BrowserRouter as Router,
+  Switch, 
+  Route,
+  Link
+} from "react-router-dom"
 import "./App.css"
 
 class LambdaDemo extends Component {
@@ -58,23 +64,51 @@ class LambdaDemo extends Component {
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header>
-          <h1 className="logo-text-splendor">Top100Crypto.info</h1>
-          <h3 className="logo-text-splendor">Live Cryptocurrency Prices</h3>
-          <h4>
-            <a
-              className="App-link"
-              href="https://j4cks.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Built By Jacks Consulting
-            </a>
-          </h4>
-          <LambdaDemo />
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <header>
+            {/* just testing the Router */}
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+                <li>
+                  <Link to="/users">Users</Link>
+                </li>
+              </ul>
+            </nav>
+          </header>
+            {/* Switch element loads 1st match to current URL;
+            (Router only declares URLs, afaict)  */}
+          <Switch>
+            <Route path="/about">
+              <p>Dummy ABOUT page</p>
+            </Route>
+            <Route path="/users">
+              <p>Dummy USERS page</p>
+            </Route>
+            <Route path="/">
+              <h1 className="logo-text-splendor">Top100Crypto.info</h1>
+              <h3 className="logo-text-splendor">Live Cryptocurrency Prices</h3>
+              <h4>
+                <a
+                  className="App-link"
+                  href="https://j4cks.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Built By Jacks Consulting
+                </a>
+              </h4>
+              <LambdaDemo />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     )
   }
 }
