@@ -11,9 +11,10 @@ import "./App.css"
 function About() {
   return(
     <div className="content-page-layout">
-      <p>Dummy ABOUT page</p>
-      <p>something else witty</p>
-      <p>or perhaps just an outlink</p>
+      <h2>What's This About</h2>
+      <p>This Top100CryptoInfo app is built in pure ReactJS by <Link to="https://j4cks.com">Jacks Consulting LLC</Link>, a digital agency headquartered in Portland, Oregon.</p>
+      <p>It's here as a proof of concept that pure ReactJS running on Netlify can offer dynamic page content without the need for dedicated servers or bloated, glitchy development frameworks.</p>
+      <p>We're also working on a new marketing site and media presence, so stay tuned and don't forget to <Link to="https://www.coinbase.com/join/jacks_pv">join Coinbase</Link> for your next-level currency needs.</p>
     </div>
   )
 }
@@ -21,9 +22,10 @@ function About() {
 function Guide() {
   return(
     <div className="content-page-layout">
-      <p>Dummy Guide page</p>
-      <p>Here you can find an old guide I wrote in 2018 about trading crypto. It can still help you learn to buy/sell crypto!</p>
-      <p><Link to="https://accounts.binance.us/en/register?ref=52116724">Join BINANCE here</Link> (The Guide link is outdated)</p>
+      <h2>Need a Guide?</h2>
+      <p>We're working on a new guide to the wild world of crypto speculating! <Link to="https://how-to-crypto.herokuapp.com/#/">Here you can find an old guide</Link> from 2018 about trading crypto. It's a little dated but it can still help you learn to buy/sell crypto!</p>
+      <p>Here's the link to <Link to="https://www.binance.com/en?ref=12272309">join Binance</Link>!</p>
+      <p>If you reside in America, you'll have more luck joining <Link to="https://accounts.binance.us/en/register?ref=52116724">BINANCE.us</Link></p>
     </div>
   )
 }

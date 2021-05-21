@@ -18,8 +18,16 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  min-height: 60vh;
+  max-width: 75vw;
+}
+.content-page-layout > p {
+  line-height: 2.6rem;
 }
 .navbar {
+  position: absolute;
+  left: 0px;
+  top: 10px;
   width: 100vw;
   display: flex;
   flex-direction: row;
