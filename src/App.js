@@ -54,7 +54,7 @@ class NomicsGrab extends Component {
     return (
       <div>
         <Router>
-          <ul className="App-feature">
+          <ul className="App-feature btn">
             {/* button that makes API call for 100 values */}
             <li onClick={this.handleClick("async-nomics-get-100")}
              className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click for Top 100"}
@@ -108,13 +108,13 @@ export default function App(){
           <nav>
             <ul className="navbar">
               <li>
-                <Link to="/">Home</Link>
+                <Link className="btn" to="/">Home</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link className="btn" to="/about">About</Link>
               </li>
               <li>
-                <Link to="/guide">Guide</Link>
+                <Link className="btn" to="/guide">Guide</Link>
               </li>
             </ul>
           </nav>
