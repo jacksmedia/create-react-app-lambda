@@ -118,6 +118,18 @@ export default function App(){
               </li>
             </ul>
           </nav>
+          <h1 className="emergeny-spacer logo-text-splendor">Top100Crypto.info</h1>
+          <h3 className="logo-text-splendor">Essential Cryptocurrency Prices</h3>
+          <h4>
+            <a
+              className="App-link"
+              href="https://j4cks.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Built By Jacks Consulting
+            </a>
+          </h4>
         </header>
           {/* Switch element loads 1st match to current URL;
           (Router only declares URLs, afaict)  */}
@@ -129,18 +141,6 @@ export default function App(){
             <Guide />
           </Route>
           <Route path="/">
-            <h1 className="logo-text-splendor">Top100Crypto.info</h1>
-            <h3 className="logo-text-splendor">Essential Cryptocurrency Prices</h3>
-            <h4>
-              <a
-                className="App-link"
-                href="https://j4cks.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Built By Jacks Consulting
-              </a>
-            </h4>
             <NomicsGrab />
           </Route>
         </Switch>
