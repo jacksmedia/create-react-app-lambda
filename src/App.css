@@ -13,6 +13,20 @@
   font-size: calc(10px + 2vmin);
   color: #020;
 }
+.content-page-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.navbar {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+}
 .App-feature {
   list-style: none;
   display: flex;
