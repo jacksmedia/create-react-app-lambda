@@ -1,10 +1,9 @@
-import React, { Component, componentDidMount } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch, 
   Route,
-  Link,
-  useParams
+  Link
 } from 'react-router-dom'
 import './App.css'
 
@@ -29,58 +28,65 @@ function Guide() {
     </div>
   )
 }
-function Coint() {
-  let { id } = useParams()
-  return <p>CointID={ id }</p>;
+
+const CoinPage = ({ match }) => {
+  const {
+    params: { coinId }
+  } = match
+  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    fetch(`/.netlify/functions/async-nomics-get-100/${coinId}`, {})
+      .then((res)=>res.json())
+      .then((response) => {
+        setData(response);
+        setIsLoading(false);
+        console.log(`/.netlify/functions/async-nomics-get-100/${coinId}`)
+      })
+      .catch((error)=>console.log(error));
+  }, [coinId]);
+  return(
+    <>
+    {!isLoading && (
+        <div className="content-page-layout">
+          <img src={data.logo_url} className="lil-image" alt='cryptocurrency logo'/>
+          <h1>Name: {data.name}</h1>
+          <h2>Symbol: {data.symbol}</h2>
+          <h2>US$={data.price}</h2>
+          <h2>Rank #{data.rank}</h2>
+          <Link to="/">Back to Homepage</Link>
+        </div>
+      )}
+    </>
+  );
 }
 
-// main API logic begins
-class NomicsGrab extends Component {
+// main API logic begins -- hooks deserve semicolons
+const Homepage = () => {
+  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState()
 
-  state = {
-    coints: []
-  }
-
-  componentDidMount(){
-    fetch('/.netlify/functions/async-nomics-get-100')
-      .then(response => response.json())
-      .then(json => this.setState({ coints: json.data }))
-  }
-  render() {
-    console.log(this.state.coints)
-    return (
-      <div>
-        <Router>
-          <h3>Displaying prices on {this.state.coints.length} digital securities</h3>
-          <ul className="big-list">
-            {this.state.coints.map(
-              coint => <li key={coint.id} className="crypto">
-                <img src={coint.logo_url} className="lil-image" alt='cryptocurrency logo'/>
-                {/*
-                  need separation into own component in order to make subpages
-                  see:
-                  https://dev.to/dsckiitdev/dynamic-pages-using-react-router-2pm
-                */}
-                <h4>{coint.symbol}
-                  <h6>(#{coint.rank})</h6>
-                </h4>
-                <h5>${coint.price}</h5>
-                <h6>{coint.name}</h6>
-                <Link to={`/${coint.symbol}`}>
-                  <h3>Readmore {coint.symbol}</h3>
-                </Link>
-              </li>
-            )}
-          </ul>
-          {/* dynamic routing logic, for the subpages' Links
-          Child fn assigns ID w React hook */}
-          <Switch>
-            <Route path="/:id" children={<Coint />}/>
-          </Switch>
-        </Router>
-      </div>
-    )
-  }
+  useEffect(()=>{
+    fetch('/.netlify/functions/async-nomics-get-100', {})
+      .then(res => res.json())
+      .then((response) => {
+        setData(response.results);
+        setIsLoading(false);
+      })
+      .catch((error)=>(console.log(error)));
+    },[]);
+  return (
+    <ul className="big-list">
+      {!isLoading && data.map((coint, index) => {
+        return(
+          <h5 key={index}>
+            <Link to={`/${index + 1}`}>{coint.symbol}</Link>
+          </h5>
+        );
+      })}
+    </ul>
+  )
 }
 
 // main App shell begins
@@ -92,15 +98,9 @@ const App = () => {
           {/* just testing the Router */}
           <nav>
             <ul className="navbar">
-              <li>
-                <Link className="btn" to="/">Home</Link>
-              </li>
-              <li>
-                <Link className="btn" to="/about">About</Link>
-              </li>
-              <li>
-                <Link className="btn" to="/guide">Guide</Link>
-              </li>
+              <li><Link className="btn" to="/">Home</Link></li>
+              <li><Link className="btn" to="/about">About</Link></li>
+              <li><Link className="btn" to="/guide">Guide</Link></li>
             </ul>
           </nav>
           <h1 className="emergency-spacer logo-text-splendor">Top100Crypto.info</h1>
@@ -119,15 +119,10 @@ const App = () => {
           {/* Switch element loads 1st match to current URL;
           (Router only declares URLs, afaict)  */}
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/guide">
-            <Guide />
-          </Route>
-          <Route path="/">
-            <NomicsGrab />
-          </Route>
+          <Route exact path="/about" component={About} />
+          <Route exact path="/guide" component={Guide} />
+          <Route exact path="/" component={Homepage} />
+          <Route path="/:coinId" component={CoinPage}/>
         </Switch>
       </div>
     </Router>
