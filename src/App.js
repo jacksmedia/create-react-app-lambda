@@ -1,18 +1,18 @@
-import React, { Component } from "react"
+import React, { Component, componentDidMount } from 'react'
 import {
   BrowserRouter as Router,
   Switch, 
   Route,
   Link,
   useParams
-} from "react-router-dom"
-import "./App.css"
+} from 'react-router-dom'
+import './App.css'
 
 function About() {
   return(
     <div className="content-page-layout">
       <h2>What's This About</h2>
-      <p>This Top100CryptoInfo app is built in pure ReactJS by <Link to="https://j4cks.com">Jacks Consulting LLC</Link>, a digital agency headquartered in Portland, Oregon.</p>
+      <p>This Top100CryptoInfo app is built in ReactJS by <Link to="https://j4cks.com">Jacks Consulting LLC</Link>, a digital agency headquartered in Portland, Oregon. It can install to your device like an app from a store, but it's actually just a jazzy HTML + JavaScript website.</p>
       <p>It's here as a proof of concept that pure ReactJS running on Netlify can offer dynamic page content without the need for dedicated servers or bloated, glitchy development frameworks.</p>
       <p>We're also working on a new marketing site and media presence, so stay tuned and don't forget to <Link to="https://www.coinbase.com/join/jacks_pv">join Coinbase</Link> for your next-level currency needs.</p>
     </div>
@@ -36,36 +36,21 @@ function Coint() {
 
 // main API logic begins
 class NomicsGrab extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, coints: [] }
-  }
-  handleClick = api => e => {
-    e.preventDefault()
 
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
+  state = {
+    coints: []
+  }
+
+  componentDidMount(){
+    fetch('/.netlify/functions/async-nomics-get-100')
       .then(response => response.json())
-      .then(json => this.setState({ loading: false, coints: json.data }))
+      .then(json => this.setState({ coints: json.data }))
   }
   render() {
-    const { loading } = this.state
     console.log(this.state.coints)
     return (
       <div>
         <Router>
-          <ul className="App-feature btn">
-            {/* button that makes API call for 100 values */}
-            <li onClick={this.handleClick("async-nomics-get-100")}
-             className="App-logo-text">{loading ? "Loading, Plz Stand By..." : "Click for Top 100"}
-            </li>
-            {/* button that makes API call for 1k values -- in dev, rn does 33 not 1000 
-            <li onClick={this.handleClick("async-nomics-get-1k")}
-             className="App-logo-text">{loading ? "Loading, This Might Take A Few..." : "Click for Top 33"}
-            </li>
-            */}
-          </ul>
-
           <h3>Displaying prices on {this.state.coints.length} digital securities</h3>
           <ul className="big-list">
             {this.state.coints.map(
@@ -99,7 +84,7 @@ class NomicsGrab extends Component {
 }
 
 // main App shell begins
-export default function App(){
+const App = () => {
   return (
     <Router>
       <div className="App">
@@ -118,7 +103,7 @@ export default function App(){
               </li>
             </ul>
           </nav>
-          <h1 className="emergeny-spacer logo-text-splendor">Top100Crypto.info</h1>
+          <h1 className="emergency-spacer logo-text-splendor">Top100Crypto.info</h1>
           <h3 className="logo-text-splendor">Essential Cryptocurrency Prices</h3>
           <h4>
             <a
@@ -148,3 +133,4 @@ export default function App(){
     </Router>
   )
 }
+export default App
