@@ -6,6 +6,7 @@ import {
   Link,
   useParams
 } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import './App.css'
 
 function About() {
@@ -34,6 +35,8 @@ function Coint() {
   return <p>CointID={ id }</p>;
 }
 
+
+
 // main API logic begins
 class NomicsGrab extends Component {
 
@@ -46,6 +49,26 @@ class NomicsGrab extends Component {
       .then(response => response.json())
       .then(json => this.setState({ coints: json.data }))
   }
+  constructor() {  
+    super();  
+    this.HandleClick = this.HandleClick.bind(this);  
+  }
+  HandleClick(event) {  
+    event.preventDefault();
+    Swal.fire({  
+      title: 'Success',  
+      type: 'success',  
+      text: 'Your work has been saved.',  
+    });  
+  }  
+  HandleClickHella(param_img,param_title) {  
+    Swal.fire({  
+      imageUrl: `${param_img}`,  
+      title: `${param_title}`,  
+      text: 'Event loop needs grokking! You\'re almost there-- keep researching!',  
+      footer: '<a href>Why do I have this issue?</a>'  
+    });  
+  }
   render() {
     console.log(this.state.coints)
     return (
@@ -56,27 +79,25 @@ class NomicsGrab extends Component {
             {this.state.coints.map(
               coint => <li key={coint.id} className="crypto">
                 <img src={coint.logo_url} className="lil-image" alt='cryptocurrency logo'/>
-                {/*
-                  need separation into own component in order to make subpages
-                  see:
-                  https://dev.to/dsckiitdev/dynamic-pages-using-react-router-2pm
+                <h4>#{coint.rank}&nbsp;{coint.symbol}</h4>
+                <p>{coint.name}</p>
+                
+                <h6>US${coint.price}</h6>
+
+                {/* crashes the event loop somehow, needs to have preventDefault or &c? but where?
+                <div style={{ "paddingTop": "10px" }}>  
+                  <button class="btn" onClick={this.HandleClickHella(coint.logo_url,coint.name)}>More on {coint.symbol}</button>  
+                </div>
                 */}
-                <h4>{coint.symbol}
-                  <h6>(#{coint.rank})</h6>
-                </h4>
-                <h5>${coint.price}</h5>
-                <h6>{coint.name}</h6>
-                <Link to={`/${coint.symbol}`}>
-                  <h3>Readmore {coint.symbol}</h3>
-                </Link>
               </li>
             )}
           </ul>
           {/* dynamic routing logic, for the subpages' Links
-          Child fn assigns ID w React hook */}
+          Child fn assigns ID w React hook 
           <Switch>
             <Route path="/:id" children={<Coint />}/>
           </Switch>
+          */}
         </Router>
       </div>
     )
@@ -93,13 +114,13 @@ const App = () => {
           <nav>
             <ul className="navbar">
               <li>
-                <Link className="btn" to="/">Home</Link>
+                <Link className="nav-btn" to="/">Home</Link>
               </li>
               <li>
-                <Link className="btn" to="/about">About</Link>
+                <Link className="nav-btn" to="/about">About</Link>
               </li>
               <li>
-                <Link className="btn" to="/guide">Guide</Link>
+                <Link className="nav-btn" to="/guide">Guide</Link>
               </li>
             </ul>
           </nav>

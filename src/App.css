@@ -4,7 +4,7 @@
 }
 .App {
   text-align: center;
-  background: linear-gradient(snow, #88f);
+  background: linear-gradient(snow, #66c);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -46,12 +46,21 @@ a {
   justify-content: space-around;
   animation: App-sezzy-colors infinite 6s;
 }
-.btn {
+.nav-btn {
   font-size: 2.7vh;
   background: radial-gradient(#020, navy);
   padding: 1vh;
   margin-bottom: 2vh;
   border-radius: 2.1rem;
+  border: groove #ff00ff 0.6vh;
+}
+.btn {
+  font-size: 1.4vh;
+  background: radial-gradient(#020, navy);
+  padding: 1vh;
+  color: #00ffff;
+  margin-bottom: 1vh;
+  border-radius: 1.1rem;
   border: groove #ff00ff 0.6vh;
 }
 .emergency-spacer {
@@ -75,9 +84,11 @@ a {
   width: 14vw; 
   min-width: 14vw;
   font-size: 1.75vw;
+  padding: 0.75vw;
   border-radius: 2.5vw;
-  border: 0.5vw #8cf dashed;
-  margin-bottom: 1vw;
+  border: 0.35vw #345 groove;
+  margin-bottom: 0.85vw;
+  background: radial-gradient(ellipse at top, white, rgba(15,15,15,0.3));
 }
 .lil-image {
   width: 12vw;
@@ -96,7 +107,7 @@ a {
     color: #ff00ff;
   }
   50% {
-    color: #ff00ff;
+    color: #00ffff;
   }
   100% {
     color: #ff00ff;
