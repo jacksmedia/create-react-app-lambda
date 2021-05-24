@@ -30,12 +30,6 @@ function Guide() {
     </div>
   )
 }
-function Coint() {
-  let { id } = useParams()
-  return <p>CointID={ id }</p>;
-}
-
-
 
 // main API logic begins
 class NomicsGrab extends Component {
@@ -44,11 +38,6 @@ class NomicsGrab extends Component {
     coints: []
   }
 
-  componentDidMount(){
-    fetch('/.netlify/functions/async-nomics-get-100')
-      .then(response => response.json())
-      .then(json => this.setState({ coints: json.data }))
-  }
   constructor() {  
     super();  
     this.HandleClick = this.HandleClick.bind(this);  
