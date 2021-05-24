@@ -1,10 +1,9 @@
-import React, { Component, componentDidMount } from 'react'
+import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch, 
   Route,
-  Link,
-  useParams
+  Link
 } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import './App.css'
