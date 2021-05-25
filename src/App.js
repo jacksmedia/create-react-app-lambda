@@ -6,6 +6,8 @@ import {
   Link
 } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { withSwalInstance } from 'sweetalert2-react'
+
 import './App.css'
 
 function About() {
@@ -29,6 +31,7 @@ function Guide() {
     </div>
   )
 }
+const SweetAlert = withSwalInstance(Swal);
 
 // main API logic begins
 class NomicsGrab extends Component {
@@ -41,8 +44,7 @@ class NomicsGrab extends Component {
     super();  
     this.HandleClick = this.HandleClick.bind(this);  
   }
-  HandleClick(event) {  
-    event.preventDefault();
+  HandleClick() {  
     Swal.fire({  
       title: 'Success',  
       type: 'success',  
@@ -68,13 +70,19 @@ class NomicsGrab extends Component {
               coint => <li key={coint.id} className="crypto">
                 <img src={coint.logo_url} className="lil-image" alt='cryptocurrency logo'/>
                 <h4>#{coint.rank}&nbsp;{coint.symbol}</h4>
-                <p>{coint.name}</p>
-                
+                <p>{coint.name}</p>                
                 <h6>US${coint.price}</h6>
-
-                {/* crashes the event loop somehow, needs to have preventDefault or &c? but where?
                 <div style={{ "paddingTop": "10px" }}>  
                   <button class="btn" onClick={this.HandleClickHella(coint.logo_url,coint.name)}>More on {coint.symbol}</button>  
+                </div>
+                 <div>
+                  <button onClick={() => this.setState({ show: true })}>Alert</button>
+                  <SweetAlert
+                    show={this.state.show}
+                    title="Demo"
+                    text="SweetAlert in React"
+                    onConfirm={() => this.setState({ show: false })}
+                  />
                 </div>
                 */}
               </li>
