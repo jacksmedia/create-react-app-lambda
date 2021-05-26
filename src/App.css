@@ -54,14 +54,22 @@ a {
   border-radius: 2.1rem;
   border: groove #ff00ff 0.6vh;
 }
+.nav-btn {
+  font-size: 2.7vh;
+  background: radial-gradient(#020, navy);
+  padding: 1vh;
+  margin-bottom: 2vh;
+  border-radius: 2.1rem;
+  border: groove #ff00ff 0.6vh;
+}
 .btn {
   font-size: 1.4vh;
   background: radial-gradient(#020, navy);
   padding: 1vh;
-  color: #00ffff;
   margin-bottom: 1vh;
   border-radius: 1.1rem;
   border: groove #ff00ff 0.6vh;
+  animation: App-sezzy-colors infinite 6s;
 }
 .emergency-spacer {
   padding-top: 50px;

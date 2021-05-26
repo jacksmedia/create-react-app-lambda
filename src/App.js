@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 import React, { Component } from 'react'
-=======
-import React, { useState, useEffect } from 'react'
->>>>>>> subpages
 import {
   BrowserRouter as Router,
   Switch, 
   Route,
   Link
 } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import { withSwalInstance } from 'sweetalert2-react'
 
 import './App.css'
 
@@ -24,7 +18,6 @@ function About() {
     </div>
   )
 }
-
 function Guide() {
   return(
     <div className="content-page-layout">
@@ -36,68 +29,42 @@ function Guide() {
   )
 }
 
-const SweetAlert = withSwalInstance(Swal);
+// main API logic begins
+class Homepage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { loading: false, coints: [] }
+  }
+  handleClick = api => e => {
+    e.preventDefault()
 
-const CoinPage = ({ match }) => {
-  const {
-    params: { coinId }
-  } = match
-  const [isLoading, setIsLoading] = useState(true)
-  const [data, setData] = useState()
-
-  useEffect(() => {
-    fetch(`/.netlify/functions/async-nomics-get-100/${coinId}`, {})
-      .then((res)=>res.json())
-      .then((response) => {
-        setData(response);
-        setIsLoading(false);
-        console.log(`/.netlify/functions/async-nomics-get-100/${coinId}`)
-      })
-      .catch((error)=>console.log(error));
-  }, [coinId]);
-  return(
-    <>
-    {!isLoading && (
-        <div className="content-page-layout">
-          <img src={data.logo_url} className="lil-image" alt='cryptocurrency logo'/>
-          <h1>Name: {data.name}</h1>
-          <h2>Symbol: {data.symbol}</h2>
-          <h2>US$={data.price}</h2>
-          <h2>Rank #{data.rank}</h2>
-          <Link to="/">Back to Homepage</Link>
-        </div>
-      )}
-    </>
-  );
-}
-
-
-// main API logic begins -- hooks deserve semicolons
-const Homepage = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [data, setData] = useState()
-
-  useEffect(()=>{
-    fetch('/.netlify/functions/async-nomics-get-100', {})
-      .then(res => res.json())
-      .then((response) => {
-        setData(response.results);
-        setIsLoading(false);
-      })
-      .catch((error)=>(console.log(error)));
-    },[]);
-  return (
-    <ul className="big-list">
-      {!isLoading && data.map((coint, index) => {
-        return(
-          <h5 key={index}>
-            <Link to={`/${index + 1}`}>{coint.symbol}</Link>
-          </h5>
-        );
-      })}
-    </ul>
-  )
->>>>>>> subpages
+    this.setState({ loading: true })
+    fetch("/.netlify/functions/" + api)
+      .then(response => response.json())
+      .then(json => this.setState({ loading: false, coints: json.data }))
+  }
+  render() {
+    const { isLoading } = this.state
+    console.log(this.state.coints)
+    return (
+      <div>
+        <div onClick={this.handleClick("async-nomics-get-100")} className="btn">{this.state.loading ? "Loading, Plz Stand By..." : "Click for Top 100"}</div>
+        <ul className="big-list">
+          {!isLoading && this.state.coints.map((coint) => {
+            return(
+              <li key={coint.id} className="crypto">
+                <img src={coint.logo_url} className="lil-image" alt='cryptocurrency logo'/>
+                <h5>{coint.name}</h5>
+                <h4>{coint.symbol}</h4>
+                <h5>${coint.price}</h5>
+                <h2>#{coint.rank}</h2>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    )
+  }
 }
 
 // main App shell begins
@@ -109,9 +76,9 @@ const App = () => {
           {/* just testing the Router */}
           <nav>
             <ul className="navbar">
-              <li><Link className="btn" to="/">Home</Link></li>
-              <li><Link className="btn" to="/about">About</Link></li>
-              <li><Link className="btn" to="/guide">Guide</Link></li>
+              <li><Link className="nav-btn" to="/">Home</Link></li>
+              <li><Link className="nav-btn" to="/about">About</Link></li>
+              <li><Link className="nav-btn" to="/guide">Guide</Link></li>
             </ul>
           </nav>
           <h1 className="emergency-spacer logo-text-splendor">Top100Crypto.info</h1>
@@ -133,7 +100,6 @@ const App = () => {
           <Route exact path="/about" component={About} />
           <Route exact path="/guide" component={Guide} />
           <Route exact path="/" component={Homepage} />
-          <Route path="/:coinId" component={CoinPage}/>
         </Switch>
       </div>
     </Router>
